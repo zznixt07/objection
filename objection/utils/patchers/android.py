@@ -308,13 +308,13 @@ class AndroidPatcher(BasePlatformPatcher):
                 'dump',
                 'badging',
                 self.apk_source
-            ]), timeout=self.command_run_timeout)
+            ]), binary=True, timeout=self.command_run_timeout)
 
             if len(o.err) > 0:
                 click.secho('An error may have occurred while running aapt.', fg='red')
                 click.secho(o.err, fg='red')
 
-            self.aapt = o.out
+            self.aapt = o.out.decode('utf-8')
 
         return self.aapt
 
